@@ -6,12 +6,12 @@ log2timeline.py --artifact-filters WindowsEventLogs --parsers "winevtx" --partit
 ##adjust t he timeframe you want to analyse
 psort.py -o json_line -w /data/test/output-evtx.json /data/test/output-evtx.plaso "date > '2020-11-03 20:00:00' AND date < '2020-11-05 00:00:00'" &&
 ## make the brackets insert 1st character and last & format for log anaytics
-(echo -n "["; cat /data/test/output-evtx.json; echo -n "]") >/data/test/evtx.json &&
+(echo -n "["; cat /data/test/output-evtx.json; echo -n "]") | sed ':a;N;$!ba;s/,]/]/g' >/data/test/evtx.json &&
 
 ## Collect and parse mft
 log2timeline.py --artifact-filters NTFSMFTFiles --parser mft --partitions all --no_vss --workers ${WORKER_NUM:-2} --buffer_size 2048M --profiling_sample_rate 10000 --log-file=/data/test/log2timeline.log /data/test/output-mft.plaso /data/*flat.vmdk &&
 psort.py -o json_line -w /data/test/output-mft.json /data/test/output-mft.plaso "date > '2020-11-03 20:00:00' AND date < '2020-11-05 00:00:00'" &&
-(echo -n "["; cat /data/test/output-mft.json; echo -n "]") >/data/test/mft.json &&
+(echo -n "["; cat /data/test/output-mft.json; echo -n "]") | sed ':a;N;$!ba;s/,]/]/g' >/data/test/mft.json &&
 
 ## Collect registry artefacts into output.plaso
 log2timeline.py --artifact-filters WindowsRegistryFilesAndTransactionLogs --partitions all --parsers "winreg" --no_vss --workers ${WORKER_NUM:-2} --buffer_size 2048M --profiling_sample_rate 10000 --log-file=/data/test/log2timeline.log /data/test/output-winreg.plaso /data/*flat.vmdk &&
