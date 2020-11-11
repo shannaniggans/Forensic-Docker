@@ -25,6 +25,10 @@ docker run --name bulkextractor -d -v "Shared Directory":/out bulkextractor
 git clone --recursive https://github.com/shannaniggans/Forensic-Docker.git
 cd Forensic-Docker/plaso
 cp json_line.py <image file location folder>
+vi entrypoint.sh
+```
+Adjust the time range in the psort lines to suit your timeframe required.
+```
 docker build -t plaso2la .
 docker run -ti <image file location folder>/:/data/ plaso2la
 ```
