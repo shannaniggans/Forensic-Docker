@@ -1,6 +1,6 @@
+  
 # -*- coding: utf-8 -*-
 """Output module that saves data into a JSON line format.
-
 JSON line format is a single JSON entry or event per line instead
 of grouping all the output into a single JSON entity.
 """
@@ -20,7 +20,6 @@ class JSONLineOutputModule(interface.LinearOutputModule):
 
   def __init__(self, output_mediator):
     """Initializes the output module object.
-
     Args:
       output_mediator (OutputMediator): mediates interactions between output
           modules and other components, such as storage and dfvfs.
@@ -32,7 +31,6 @@ class JSONLineOutputModule(interface.LinearOutputModule):
 
   def WriteEventBody(self, event, event_data, event_data_stream, event_tag):
     """Writes event values to the output.
-
     Args:
       event (EventObject): event.
       event_data (EventData): event data.
