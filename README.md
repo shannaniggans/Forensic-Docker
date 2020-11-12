@@ -36,3 +36,4 @@ NOTE:
 1. entrypoint.sh is looking for vmdk files at the moment
 2. The psort timeframe needs to be adjusted in entrypoint.sh before running
 3. json_line has been adjusted to use a ',' instead of '\n' to break events
+4. The error "standard_init_linux.go:211: exec user process caused "no such file or directory"" is deceptive, it means that you need to use dos2unix on the entrypoint file.
